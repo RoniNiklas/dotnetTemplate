@@ -1,8 +1,5 @@
-﻿using Shared.DTOs;
-using Shared.Requests;
-
-namespace Handlers.WeatherForecast;
-internal class GetSingleWeatherForecastQueryHandler : IRequestHandler<GetSingleWeatherForecastQuery, WeatherForecastViewModel>
+﻿namespace Handlers.WeatherForecast;
+internal class GetSingleWeatherForecastQueryHandler : IRequestHandler<GetSingleWeatherForecast, WeatherForecastViewModel>
 {
     private static readonly string[] _summaries = new[]
     {
@@ -18,7 +15,7 @@ internal class GetSingleWeatherForecastQueryHandler : IRequestHandler<GetSingleW
                 "Scorching"
             };
 
-    public Task<WeatherForecastViewModel> Handle(GetSingleWeatherForecastQuery request, CancellationToken cancellationToken)
+    public Task<WeatherForecastViewModel> Handle(GetSingleWeatherForecast request, CancellationToken cancellationToken)
     {
         return Task.FromResult(new WeatherForecastViewModel
         (

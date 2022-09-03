@@ -29,12 +29,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline
 app.UseHttpsRedirection();
 
-
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors();
-app.InstallEndpoints(typeof(GetWeatherForecastsQuery), typeof(GetWeatherForecastsQueryHandler));
+app.InstallEndpoints(typeof(GetWeatherForecasts), typeof(GetWeatherForecastsQueryHandler));
 
-app.MapPost("WeatherForecasts", async (IMediator mediator, GetWeatherForecastsQuery input) => await mediator.Send(input));
+// just for benchmark comparison
+app.MapPost("WeatherForecasts", async (IMediator mediator, GetWeatherForecasts input) => await mediator.Send(input));
 
 app.Run();

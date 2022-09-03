@@ -8,6 +8,8 @@
 
 	<ItemGroup>
 		<Using Include="MediatR"/>
+		<Using Include="Shared.DTOs"/>
+		<Using Include="Shared.Requests"/>
 	</ItemGroup>
 
   <ItemGroup>

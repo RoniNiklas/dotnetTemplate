@@ -1,8 +1,5 @@
-﻿using Shared.DTOs;
-using Shared.Requests;
-
-namespace Handlers.WeatherForecast;
-public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecastsQuery, WeatherForecastViewModel[]>
+﻿namespace Handlers.WeatherForecast;
+public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecasts, WeatherForecastViewModel[]>
 {
     private static readonly string[] _summaries = new[]
     {
@@ -17,7 +14,7 @@ public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecas
                 "Sweltering",
                 "Scorching"
             };
-    public Task<WeatherForecastViewModel[]> Handle(GetWeatherForecastsQuery request, CancellationToken cancellationToken)
+    public Task<WeatherForecastViewModel[]> Handle(GetWeatherForecasts request, CancellationToken cancellationToken)
     {
         return Task.FromResult(Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecastViewModel
