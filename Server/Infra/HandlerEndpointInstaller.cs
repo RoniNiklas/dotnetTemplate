@@ -35,9 +35,10 @@ internal static class HandlerEndpointInstaller
                 throw new Exception($"ReturnType of {requestType.Name} could not be determined from its IRequest interface. All requests must implement IRequest<T> for the T to be discoverable.");
             }
 
-            app.MapPost(requestType.Name, async (IMediator mediator, HttpRequest request) =>
+            app.MapPost(requestType.Name, async (IMediator mediator, HttpRequest httpRequest) =>
                 {
-                    var res = await mediator.Send((await request.ReadFromJsonAsync(requestType))!);
+                    var request = await httpRequest.ReadFromJsonAsync(requestType);
+                    var res = await mediator.Send(request);
                     return res;
                 })
                 .Accepts(requestType, false, "application/json")
