@@ -8,9 +8,18 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (forecasts.Count() == 0 && errors?.Count() == 0)
 {
     <p><em>Loading...</em></p>
+}
+else if (errors?.Count > 0) {
+    <div>
+        <ul>
+            @foreach (var error in errors) {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
 }
 else
 {
@@ -38,10 +47,16 @@ else
 }
 
 @code {
-    private WeatherForecastViewModel[]? forecasts;
+    private WeatherForecastViewModel[] forecasts = new WeatherForecastViewModel[0];
+    private Dictionary<string, string>? errors;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await RPCClient.HandleAsync(new GetWeatherForecasts());
+        var res = await RPCClient.HandleAsync(new GetWeatherForecasts());
+        Console.WriteLine(res);
+        res.Switch(
+            data => { forecasts = data ?? new WeatherForecastViewModel[0]; },
+            error => { errors = error.Errors;  }
+        );
     }
 }

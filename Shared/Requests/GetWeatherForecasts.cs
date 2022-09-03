@@ -1,5 +1,5 @@
 ﻿namespace Shared.Requests;
 
-public record GetWeatherForecasts : IRequest<WeatherForecastViewModel[]>
+public record GetWeatherForecasts : IRequest<RequestResult<WeatherForecastViewModel[]>>
 {
 }

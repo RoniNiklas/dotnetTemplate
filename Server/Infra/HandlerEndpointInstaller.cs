@@ -36,9 +36,12 @@ internal static class HandlerEndpointInstaller
             }
 
             app.MapPost(requestType.Name, async (IMediator mediator, HttpRequest request) =>
-                await mediator.Send((await request.ReadFromJsonAsync(requestType))!))
-                    .Accepts(requestType, false, "application/json")
-                    .Produces(200, returnType);
+                {
+                    var res = await mediator.Send((await request.ReadFromJsonAsync(requestType))!);
+                    return res;
+                })
+                .Accepts(requestType, false, "application/json")
+                .Produces(200, returnType); ;
         }
     }
 }
