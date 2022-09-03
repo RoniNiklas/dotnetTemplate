@@ -1,5 +1,7 @@
-﻿namespace Handlers.WeatherForecast;
-internal class GetSingleWeatherForecastQueryHandler : IRequestHandler<GetSingleWeatherForecast, WeatherForecastViewModel>
+﻿using OneOf;
+
+namespace Handlers.WeatherForecast;
+internal class GetSingleWeatherForecastQueryHandler : IRequestHandler<GetSingleWeatherForecast, OneOf<WeatherForecastViewModel, ValidationError>>
 {
     private static readonly string[] _summaries = new[]
     {
@@ -15,13 +17,13 @@ internal class GetSingleWeatherForecastQueryHandler : IRequestHandler<GetSingleW
                 "Scorching"
             };
 
-    public Task<WeatherForecastViewModel> Handle(GetSingleWeatherForecast request, CancellationToken cancellationToken)
+    public async Task<OneOf<WeatherForecastViewModel, ValidationError>> Handle(GetSingleWeatherForecast request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(new WeatherForecastViewModel
+        return new WeatherForecastViewModel
         (
             DateTime.Now.AddDays(request.Id),
             Random.Shared.Next(-20, 55),
             _summaries[Random.Shared.Next(_summaries.Length)]
-        ));
+        );
     }
 }

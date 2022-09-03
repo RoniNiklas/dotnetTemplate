@@ -8,7 +8,7 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts.Count() == 0 && errors?.Count() == 0)
+@if (forecast == null && errors?.Count() == 0)
 {
     <p><em>Loading...</em></p>
 }
@@ -33,29 +33,23 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
+            <tr>
+                <td>@forecast.Date.ToShortDateString()</td>
+                <td>@forecast.TemperatureC</td>
+                <td>@forecast.TemperatureF</td>
+                <td>@forecast.Summary</td>
+            </tr>
         </tbody>
     </table>
 }
 
 @code {
-    private WeatherForecastViewModel[] forecasts = new WeatherForecastViewModel[0];
+    private WeatherForecastViewModel? forecast;
     private Dictionary<string, string> errors = new();
 
     protected override async Task OnInitializedAsync()
     {
-        var res = await RPCClient.HandleAsync(new GetWeatherForecasts());
-        res.Switch(
-            data => { Console.WriteLine(data + "data");  forecasts = data; },
-            error => { Console.WriteLine(error + "error"); errors = error.Errors; }
-        );
+        var res = await RPCClient.HandleAsync(new GetSingleWeatherForecast(1));
+        forecast = res.Value0;
     }
 }
