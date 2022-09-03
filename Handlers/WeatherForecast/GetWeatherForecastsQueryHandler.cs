@@ -18,13 +18,6 @@ public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecas
             };
     public async Task<OneOf<WeatherForecastViewModel[], ValidationError>> Handle(GetWeatherForecasts request, CancellationToken cancellationToken)
     {
-        if (Random.Shared.NextSingle() > 0.5)
-        {
-            return new ValidationError(new Dictionary<string, string>()
-                {
-                    { "key", "value" }
-                });
-        }
         return Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecastViewModel
                 (
