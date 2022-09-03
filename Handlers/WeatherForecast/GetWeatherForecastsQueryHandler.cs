@@ -22,7 +22,7 @@ public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecas
                 RequestResult.Invalid<WeatherForecastViewModel[]>(new Dictionary<string, string>()
                 {
                     { "key", "value" }
-                });
+                }));
         }
         return Task.FromResult(
             RequestResult.Success(Enumerable.Range(1, 5).Select(index =>
