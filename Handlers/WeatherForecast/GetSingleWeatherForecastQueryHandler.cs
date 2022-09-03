@@ -1,7 +1,6 @@
-﻿using OneOf;
+﻿namespace Handlers.WeatherForecast;
 
-namespace Handlers.WeatherForecast;
-internal class GetSingleWeatherForecastQueryHandler : IRequestHandler<GetSingleWeatherForecast, OneOf<WeatherForecastViewModel, ValidationError>>
+internal class GetSingleWeatherForecastQueryHandler : IRequestHandler<GetSingleWeatherForecast, RequestResult<WeatherForecastViewModel>>
 {
     private static readonly string[] _summaries = new[]
     {
@@ -17,17 +16,13 @@ internal class GetSingleWeatherForecastQueryHandler : IRequestHandler<GetSingleW
         "Scorching"
     };
 
-    public async Task<OneOf<WeatherForecastViewModel, ValidationError>> Handle(GetSingleWeatherForecast request, CancellationToken cancellationToken)
+    public async Task<RequestResult<WeatherForecastViewModel>> Handle(GetSingleWeatherForecast request, CancellationToken cancellationToken)
     {
-        var valRes = request.Validate();
-
-        return valRes.IsValid
-            ? new WeatherForecastViewModel
+        return new WeatherForecastViewModel
                 (
                     DateTime.Now.AddDays(request.Id),
                     Random.Shared.Next(-20, 55),
                     _summaries[Random.Shared.Next(_summaries.Length)]
-                )
-            : new ValidationError(valRes.Errors);
+                );
     }
 }

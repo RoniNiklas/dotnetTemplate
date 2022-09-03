@@ -9,6 +9,9 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
+<input @bind="Id" />
+<button @onclick="FetchDataAsync">Fetch</button>
+
 @if (forecast == null && errors?.Count() == 0)
 {
     <p><em>Loading...</em></p>
@@ -47,6 +50,22 @@ else
 @code {
     private WeatherForecastViewModel? forecast;
     private List<ValidationFailure> errors = new();
+    private int Id { get; set; } = 1;
+
+    protected async Task FetchDataAsync() {
+        var req = new GetSingleWeatherForecast(Id);
+        var valRes = req.Validate();
+        if (valRes.IsValid) {
+            var res = await RPCClient.HandleAsync(new GetSingleWeatherForecast(Id));
+            res.Switch(
+                success => { forecast = success; errors = new(); },
+                error => { forecast = null;  errors = error.Errors; } 
+            );
+        } else {
+            errors = valRes.Errors;
+        }
+        StateHasChanged();
+    }
 
     protected override async Task OnInitializedAsync()
     {

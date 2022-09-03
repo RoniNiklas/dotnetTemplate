@@ -1,4 +1,5 @@
 using Handlers.WeatherForecast;
+using Server.Infra.MediatR;
 using Shared.Requests;
 
 // SERVICES
@@ -9,8 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// FluentValidation
+builder.Services.AddValidatorsFromAssemblyContaining(typeof(GetWeatherForecasts));
+
 // MEDIATR
 builder.Services.AddMediatR(typeof(GetWeatherForecastsQueryHandler));
+builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
 // CORS
 builder.Services.AddCors(options =>
