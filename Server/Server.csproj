@@ -6,19 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+	<ItemGroup>
+		<Using Include="MediatR" />
+		<Using Include="Server.Infra" />
+	</ItemGroup>
+
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\APIV1\APIV1.csproj" />
-    <ProjectReference Include="..\APIV2\APIV2.csproj" />
-    <ProjectReference Include="..\ServerInfra\ServerInfra.csproj" />
+    <ProjectReference Include="..\Handlers\Handlers.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Infra\" />
-  </ItemGroup>
-
 
 </Project>
