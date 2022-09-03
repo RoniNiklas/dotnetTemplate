@@ -1,9 +1,6 @@
 using Handlers.WeatherForecast;
 using Shared.Requests;
 
-//CONSTS
-const string ClientPolicyName = "blazor-client";
-
 // SERVICES
 var builder = WebApplication.CreateBuilder(args);
 
