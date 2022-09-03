@@ -1,5 +1,7 @@
-﻿namespace Handlers.WeatherForecast;
-public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecasts, RequestResult<WeatherForecastViewModel[]>>
+﻿using OneOf;
+
+namespace Handlers.WeatherForecast;
+public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecasts, OneOf<WeatherForecastViewModel[], ValidationError>>
 {
     private static readonly string[] _summaries = new[]
     {
@@ -14,24 +16,22 @@ public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecas
                 "Sweltering",
                 "Scorching"
             };
-    public Task<RequestResult<WeatherForecastViewModel[]>> Handle(GetWeatherForecasts request, CancellationToken cancellationToken)
+    public async Task<OneOf<WeatherForecastViewModel[], ValidationError>> Handle(GetWeatherForecasts request, CancellationToken cancellationToken)
     {
         if (Random.Shared.NextSingle() > 0.5)
         {
-            return Task.FromResult(
-                RequestResult.Invalid<WeatherForecastViewModel[]>(new Dictionary<string, string>()
+            return new ValidationError(new Dictionary<string, string>()
                 {
                     { "key", "value" }
-                }));
+                });
         }
-        return Task.FromResult(
-            RequestResult.Success(Enumerable.Range(1, 5).Select(index =>
+        return Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecastViewModel
                 (
                     DateTime.Now.AddDays(index),
                     Random.Shared.Next(-20, 55),
                     _summaries[Random.Shared.Next(_summaries.Length)]
                 ))
-                .ToArray()));
+                .ToArray();
     }
 }

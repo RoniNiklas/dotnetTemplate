@@ -7,13 +7,17 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<Using Include="MediatR"/>
-		<Using Include="Shared.DTOs"/>
-		<Using Include="Shared.Requests"/>
+		<Using Include="MediatR" />
+		<Using Include="Shared.DTOs" />
+		<Using Include="Shared.Requests" />
 	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MediatR.Contracts" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OneOf\OneOf.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{5EC9F0B3-1FC9-45E9-8AB8-A251343F8327}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Handlers", "Handlers\Handlers.csproj", "{F1CFD508-6B52-4F0F-ADCB-8EE163A84B75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Handlers", "Handlers\Handlers.csproj", "{F1CFD508-6B52-4F0F-ADCB-8EE163A84B75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmark", "Benchmark\Benchmark.csproj", "{DF0C1BB2-7618-45CF-88AE-978C90EB3ACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark", "Benchmark\Benchmark.csproj", "{DF0C1BB2-7618-45CF-88AE-978C90EB3ACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOf", "OneOf\OneOf.csproj", "{AEB6C35B-6619-4609-9F7E-B401CF89075F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DF0C1BB2-7618-45CF-88AE-978C90EB3ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF0C1BB2-7618-45CF-88AE-978C90EB3ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF0C1BB2-7618-45CF-88AE-978C90EB3ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEB6C35B-6619-4609-9F7E-B401CF89075F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEB6C35B-6619-4609-9F7E-B401CF89075F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB6C35B-6619-4609-9F7E-B401CF89075F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEB6C35B-6619-4609-9F7E-B401CF89075F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

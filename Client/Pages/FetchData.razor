@@ -48,15 +48,14 @@ else
 
 @code {
     private WeatherForecastViewModel[] forecasts = new WeatherForecastViewModel[0];
-    private Dictionary<string, string>? errors;
+    private Dictionary<string, string> errors = new();
 
     protected override async Task OnInitializedAsync()
     {
         var res = await RPCClient.HandleAsync(new GetWeatherForecasts());
-        Console.WriteLine(res);
         res.Switch(
-            data => { forecasts = data ?? new WeatherForecastViewModel[0]; },
-            error => { errors = error.Errors;  }
+            data => { Console.WriteLine(data + "data");  forecasts = data; },
+            error => { Console.WriteLine(error + "error"); errors = error.Errors; }
         );
     }
 }
