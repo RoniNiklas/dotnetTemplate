@@ -7,7 +7,7 @@ using System.Net.Http.Json;
 var res = await new HttpClient().PostAsJsonAsync(APIBenchMark.assemblyscannedUrl, new { });
 res.EnsureSuccessStatusCode();
 var data = await res.Content.ReadFromJsonAsync<WeatherForecastViewModel[]>();
-if (data is null || data.Count() == 0)
+if (data is null || data.Length == 0)
 {
     throw new Exception("");
 }
@@ -15,7 +15,7 @@ if (data is null || data.Count() == 0)
 res = await new HttpClient().PostAsJsonAsync(APIBenchMark.hardCodedUrl, new { });
 res.EnsureSuccessStatusCode();
 data = await res.Content.ReadFromJsonAsync<WeatherForecastViewModel[]>();
-if (data is null || data.Count() == 0)
+if (data is null || data.Length == 0)
 {
     throw new Exception("");
 }
@@ -26,8 +26,8 @@ public class APIBenchMark
 {
     public const string assemblyscannedUrl = "https://localhost:5000/GetWeatherForecastsQuery";
     public const string hardCodedUrl = "https://localhost:5000/WeatherForecasts";
+    readonly HttpClient client = new();
 
-    HttpClient client = new HttpClient();
     [Benchmark]
     public async Task GetAssemblyScanned()
     {

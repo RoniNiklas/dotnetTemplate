@@ -1,7 +1,5 @@
-﻿using OneOf;
+﻿namespace Shared.Requests;
 
-namespace Shared.Requests;
-
-public record GetWeatherForecasts : IRequest<OneOf<WeatherForecastViewModel[], ValidationError>>
+public record GetWeatherForecasts : IRequest<RequestResult<WeatherForecastViewModel[]>>
 {
 }

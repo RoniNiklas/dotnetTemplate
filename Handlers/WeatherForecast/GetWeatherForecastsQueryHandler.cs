@@ -1,7 +1,5 @@
-﻿using OneOf;
-
-namespace Handlers.WeatherForecast;
-public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecasts, OneOf<WeatherForecastViewModel[], ValidationError>>
+﻿namespace Handlers.WeatherForecast;
+public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecasts, RequestResult<WeatherForecastViewModel[]>>
 {
     private static readonly string[] _summaries = new[]
     {
@@ -16,7 +14,7 @@ public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecas
                 "Sweltering",
                 "Scorching"
             };
-    public async Task<OneOf<WeatherForecastViewModel[], ValidationError>> Handle(GetWeatherForecasts request, CancellationToken cancellationToken)
+    public async Task<RequestResult<WeatherForecastViewModel[]>> Handle(GetWeatherForecasts request, CancellationToken cancellationToken)
     {
         return Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecastViewModel

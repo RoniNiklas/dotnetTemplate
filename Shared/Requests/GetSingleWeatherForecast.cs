@@ -10,7 +10,7 @@ public record GetSingleWeatherForecast(int Id) : IRequest<RequestResult<WeatherF
     {
         public Validator()
         {
-            RuleFor(item => item.Id).NotEmpty();
+            RuleFor(item => item.Id).GreaterThan(0);
         }
     }
 }
