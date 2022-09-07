@@ -1,3 +1,4 @@
+## Just a dotnet template to build apps on top of
 ## Use:
 
 1. Open a terminal and go to  Server
